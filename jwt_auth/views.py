@@ -41,3 +41,6 @@ class ObtainJSONWebToken(View):
 
         return HttpResponseBadRequest(
             json_context, content_type='application/json')
+
+
+obtain_jwt_token = ObtainJSONWebToken.as_view()
