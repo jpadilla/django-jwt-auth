@@ -1,5 +1,7 @@
 # Django JWT Auth
 
+[![Build Status](https://travis-ci.org/jpadilla/django-jwt-auth.svg?branch=master)](https://travis-ci.org/jpadilla/django-jwt-auth) [![PyPI version](https://badge.fury.io/py/django-jwt-auth.png)](http://badge.fury.io/py/django-jwt-auth)
+
 ## Overview
 This package provides [JSON Web Token Authentication](http://tools.ietf.org/html/draft-ietf-oauth-json-web-token) support for Django.
 
