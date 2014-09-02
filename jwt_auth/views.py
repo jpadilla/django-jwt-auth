@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic import View
 from django.core.serializers.json import DjangoJSONEncoder
 
-from jwt_auth.compat import json
+from jwt_auth.compat import json, smart_text
 from jwt_auth.forms import JSONWebTokenForm
 
 
@@ -13,7 +13,7 @@ class ObtainJSONWebToken(View):
 
     def post(self, request, *args, **kwargs):
         try:
-            request_json = json.loads(request.body)
+            request_json = json.loads(smart_text(request.body))
         except ValueError:
             return self.render_bad_request_response()
 

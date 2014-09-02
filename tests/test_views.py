@@ -2,12 +2,10 @@ from django.test import TestCase
 from django.test.client import Client
 
 from jwt_auth import utils
-from jwt_auth.compat import json, User
+from jwt_auth.compat import json, User, smart_text
 
 
 class ObtainJSONWebTokenTestCase(TestCase):
-    # urls = 'tests.test_views'
-
     def setUp(self):
         self.email = 'jpueblo@example.com'
         self.username = 'jpueblo'
@@ -32,7 +30,7 @@ class ObtainJSONWebTokenTestCase(TestCase):
             content_type='application/json'
         )
 
-        response_content = json.loads(response.content)
+        response_content = json.loads(smart_text(response.content))
 
         decoded_payload = utils.jwt_decode_handler(response_content['token'])
 
@@ -83,7 +81,7 @@ class ObtainJSONWebTokenTestCase(TestCase):
             HTTP_AUTHORIZATION=auth
         )
 
-        response_content = json.loads(response.content)
+        response_content = json.loads(smart_text(response.content))
 
         decoded_payload = utils.jwt_decode_handler(response_content['token'])
 

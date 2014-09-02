@@ -16,3 +16,10 @@ try:
     from django.utils.encoding import smart_text
 except ImportError:
     from django.utils.encoding import smart_unicode as smart_text
+
+try:
+    # In 1.5 the test client uses force_bytes
+    from django.utils.encoding import force_bytes as force_bytes_or_smart_bytes
+except ImportError:
+    # In 1.4 the test client just uses smart_str
+    from django.utils.encoding import smart_str as force_bytes_or_smart_bytes
