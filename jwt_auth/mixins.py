@@ -1,6 +1,9 @@
 from django.http import HttpResponse
 
 import jwt
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
 from jwt_auth import settings, exceptions
 from jwt_auth.utils import get_authorization_header
 from jwt_auth.compat import json, smart_text, User
@@ -22,6 +25,7 @@ class JSONWebTokenAuthMixin(object):
     """
     www_authenticate_realm = 'api'
 
+    @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         try:
             request.user, request.token = self.authenticate(request)
