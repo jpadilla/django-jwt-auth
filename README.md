@@ -1,6 +1,7 @@
 # Django JWT Auth
 
-[![Build Status](https://travis-ci.org/jpadilla/django-jwt-auth.svg?branch=master)](https://travis-ci.org/jpadilla/django-jwt-auth) [![PyPI version](https://badge.fury.io/py/django-jwt-auth.png)](http://badge.fury.io/py/django-jwt-auth)
+[![build-status-image]][travis]
+[![pypi-version]][pypi]
 
 ## Overview
 This package provides [JSON Web Token Authentication](http://tools.ietf.org/html/draft-ietf-oauth-json-web-token) support for Django.
@@ -124,3 +125,9 @@ If you store `user_id` differently than the default payload handler does, implem
 You can modify the Authorization header value prefix that is required to be sent together with the token.
 
 Default is `Bearer`.
+
+
+[build-status-image]: https://secure.travis-ci.org/jpadilla/django-jwt-auth.svg?branch=master
+[travis]: http://travis-ci.org/jpadilla/django-jwt-auth?branch=master
+[pypi-version]: https://img.shields.io/pypi/v/django-jwt-auth.svg
+[pypi]: https://pypi.python.org/pypi/django-jwt-auth
