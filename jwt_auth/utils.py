@@ -42,12 +42,16 @@ def jwt_encode_handler(payload):
 def jwt_decode_handler(token):
     from jwt_auth import settings
 
+    options = {
+        'verify_exp': settings.JWT_VERIFY_EXPIRATION,
+    }
+
     return jwt.decode(
         token,
         settings.JWT_SECRET_KEY,
         settings.JWT_VERIFY,
-        settings.JWT_VERIFY_EXPIRATION,
-        settings.JWT_LEEWAY
+        options=options,
+        leeway=settings.JWT_LEEWAY
     )
 
 
