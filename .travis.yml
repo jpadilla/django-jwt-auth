@@ -2,8 +2,6 @@ language: python
 
 sudo: false
 
-services: sqlite
-
 env:
     - TOX_ENV=py35-django19
     - TOX_ENV=py34-django19
