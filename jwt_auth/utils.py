@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 from datetime import datetime
+import importlib
 
 import jwt
-from django.utils import importlib
 
 
 def jwt_payload_handler(user):
