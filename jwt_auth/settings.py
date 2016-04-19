@@ -5,28 +5,28 @@ from django.conf import settings
 from jwt_auth.utils import import_from_string
 
 
-JWT_ENCODE_HANDLER = getattr(
+JWT_ENCODE_HANDLER = import_from_string(getattr(
     settings,
     'JWT_ENCODE_HANDLER',
-    import_from_string('jwt_auth.utils.jwt_encode_handler')
+    'jwt_auth.utils.jwt_encode_handler')
 )
 
-JWT_DECODE_HANDLER = getattr(
+JWT_DECODE_HANDLER = import_from_string(getattr(
     settings,
     'JWT_DECODE_HANDLER',
-    import_from_string('jwt_auth.utils.jwt_decode_handler')
+    'jwt_auth.utils.jwt_decode_handler')
 )
 
-JWT_PAYLOAD_HANDLER = getattr(
+JWT_PAYLOAD_HANDLER = import_from_string(getattr(
     settings,
     'JWT_PAYLOAD_HANDLER',
-    import_from_string('jwt_auth.utils.jwt_payload_handler')
+    'jwt_auth.utils.jwt_payload_handler')
 )
 
-JWT_PAYLOAD_GET_USER_ID_HANDLER = getattr(
+JWT_PAYLOAD_GET_USER_ID_HANDLER = import_from_string(getattr(
     settings,
     'JWT_PAYLOAD_GET_USER_ID_HANDLER',
-    import_from_string('jwt_auth.utils.jwt_get_user_id_from_payload_handler')
+    'jwt_auth.utils.jwt_get_user_id_from_payload_handler')
 )
 
 JWT_SECRET_KEY = getattr(
