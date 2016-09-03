@@ -21,12 +21,14 @@ $ pip install django-jwt-auth
 In your `urls.py` add the following URL route to enable obtaining a token via a POST included the user's username and password.
 
 ```python
-urlpatterns = patterns(
-    '',
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+
+urlpatterns = [
     # ...
 
-    url(r'^api-token-auth/', 'jwt_auth.views.obtain_jwt_token'),
-)
+    url(r'api-token-auth/', obtain_jwt_token),
+    url(r'api-token-refresh/', refresh_jwt_token),
+]
 ```
 
 You can easily test if the endpoint is working by doing the following in your terminal, if you had a user created with the username **admin** and password **abc123**.
