@@ -43,6 +43,15 @@ Now in order to access protected api urls you must include the `Authorization: B
 $ curl -H "Authorization: Bearer <your_token>" http://localhost:8000/protected-url/
 ```
 
+There is also a provided middleware if you would prefer that to the view integration.  Just add the following to your middleware:
+
+```python
+MIDDLEWARE_CLASSES = (
+    # ...
+    'jwt_auth.middleware.JWTAuthenticationMiddleware',
+)
+```
+
 ## Additional Settings
 There are some additional settings that you can override similar to how you'd do it with Django REST framework itself. Here are all the available defaults.
 
@@ -60,6 +69,7 @@ JWT_EXPIRATION_DELTA = datetime.timedelta(seconds=300)
 JWT_ALLOW_REFRESH = False
 JWT_REFRESH_EXPIRATION_DELTA = datetime.timedelta(days=7)
 JWT_AUTH_HEADER_PREFIX = 'Bearer'
+JWT_LOGIN_INTEGRATION = False
 ```
 This packages uses the JSON Web Token Python implementation, [PyJWT](https://github.com/progrium/pyjwt) and allows to modify some of it's available options.
 
@@ -128,6 +138,8 @@ You can modify the Authorization header value prefix that is required to be sent
 
 Default is `Bearer`.
 
+### JWT_LOGIN_INTEGRATION
+Creates and stores a JWT token in your session when you successfully login. This token is accessible from the `jwt_token` template tag for putting in an HTML meta header.
 
 [build-status-image]: https://secure.travis-ci.org/jpadilla/django-jwt-auth.svg?branch=master
 [travis]: http://travis-ci.org/jpadilla/django-jwt-auth?branch=master

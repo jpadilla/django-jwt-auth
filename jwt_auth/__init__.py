@@ -13,3 +13,5 @@ __version__ = '0.0.2'
 __author__ = 'Jose Padilla'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Jose Padilla'
+
+default_app_config = 'jwt_auth.apps.JwtAuthAppConfig'
