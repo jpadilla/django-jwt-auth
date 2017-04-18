@@ -5,17 +5,20 @@ from django.views.generic import View
 from django.core.serializers.json import DjangoJSONEncoder
 
 from jwt_auth.compat import json, smart_text
-from jwt_auth.forms import JSONWebTokenForm
+from jwt_auth.forms import JSONWebTokenForm, JSONWebTokenRefreshForm
 
 
-class ObtainJSONWebToken(View):
+class JSONWebTokenViewBase(View):
     http_method_names = ['post']
     error_response_dict = {'errors': ['Improperly formatted request']}
     json_encoder_class = DjangoJSONEncoder
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        return super(ObtainJSONWebToken, self).dispatch(request, *args, **kwargs)
+        return super(JSONWebTokenViewBase, self).dispatch(request, *args, **kwargs)
+
+    def get_form(self, request_json):
+        raise NotImplementedError()
 
     def post(self, request, *args, **kwargs):
         try:
@@ -23,7 +26,7 @@ class ObtainJSONWebToken(View):
         except ValueError:
             return self.render_bad_request_response()
 
-        form = JSONWebTokenForm(request_json)
+        form = self.get_form(request_json)
 
         if not form.is_valid():
             return self.render_bad_request_response({'errors': form.errors})
@@ -49,4 +52,15 @@ class ObtainJSONWebToken(View):
             json_context, content_type='application/json')
 
 
+class ObtainJSONWebToken(JSONWebTokenViewBase):
+    def get_form(self, request_json):
+        return JSONWebTokenForm(request_json)
+
+
+class RefreshJSONWebToken(JSONWebTokenViewBase):
+    def get_form(self, request_json):
+        return JSONWebTokenRefreshForm(request_json)
+
+
 obtain_jwt_token = ObtainJSONWebToken.as_view()
+refresh_jwt_token = RefreshJSONWebToken.as_view()

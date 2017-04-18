@@ -7,4 +7,5 @@ urlpatterns = patterns(
     '',
     (r'^jwt/$', MockView.as_view()),
     (r'^auth-token/$', 'jwt_auth.views.obtain_jwt_token'),
+    (r'^refresh-token/$', 'jwt_auth.views.refresh_jwt_token')
 )
