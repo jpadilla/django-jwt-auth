@@ -51,7 +51,8 @@ def jwt_decode_handler(token):
         settings.JWT_SECRET_KEY,
         settings.JWT_VERIFY,
         options=options,
-        leeway=settings.JWT_LEEWAY
+        leeway=settings.JWT_LEEWAY,
+        audience=settings.JWT_AUDIENCE
     )
 
 
