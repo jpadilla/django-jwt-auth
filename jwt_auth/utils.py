@@ -36,7 +36,7 @@ def jwt_encode_handler(payload):
         payload,
         settings.JWT_SECRET_KEY,
         settings.JWT_ALGORITHM
-    ).decode('utf-8')
+    )
 
 
 def jwt_decode_handler(token):
@@ -44,12 +44,13 @@ def jwt_decode_handler(token):
 
     options = {
         'verify_exp': settings.JWT_VERIFY_EXPIRATION,
+        'verify_signature': settings.JWT_VERIFY
     }
 
     return jwt.decode(
         token,
         settings.JWT_SECRET_KEY,
-        settings.JWT_VERIFY,
+        algorithms=[settings.JWT_ALGORITHM],
         options=options,
         leeway=settings.JWT_LEEWAY
     )

@@ -60,7 +60,7 @@ class JSONWebTokenAuthMixin(object):
 
         try:
             payload = jwt_decode_handler(auth[1])
-        except jwt.ExpiredSignature:
+        except jwt.ExpiredSignatureError:
             msg = 'Signature has expired.'
             raise exceptions.AuthenticationFailed(msg)
         except jwt.DecodeError:
